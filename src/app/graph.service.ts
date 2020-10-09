@@ -38,20 +38,20 @@ export class GraphService {
     });
   }
 
-  async getEvents(): Promise<Event[]> {
-    try {
-      let result =  await this.graphClient
-        .api('/me/events')
-        .select('subject,organizer,start,end')
-        .orderby('createdDateTime DESC')
-        .get();
-        //console.log(result.value);
-      return result.value;
-    } catch (error) {
-      //console.log(error);
-      this.alertsService.add('Could not get events', JSON.stringify(error, null, 2));
+    async getEvents(): Promise<Event[]> {
+      try {
+        let result =  await this.graphClient
+          .api('/me/events')
+          .select('subject,organizer,start,end')
+          .orderby('createdDateTime DESC')
+          .get();
+          //console.log(result.value);
+        return result.value;
+      } catch (error) {
+        //console.log(error);
+        this.alertsService.add('Could not get events', JSON.stringify(error, null, 2));
+      }
     }
-  }
 
   async onlineMeeting(): Promise<Event[]> {
     const onlineMeeting = {
@@ -62,12 +62,13 @@ export class GraphService {
     try {
       console.log(onlineMeeting);
       let result =  await this.graphClient
-        .api('/v1.0/me/onlineMeetings')
+        .api('/me/onlineMeetings')
+        .version('v1.0')
         //.select('subject,organizer,start,end')
         //.orderby('createdDateTime DESC')
         .post(onlineMeeting);
-        //console.log(result.value);
-      return result.value;
+        console.log(result);
+      return result.joinWebUrl;
     } catch (error) {
       console.log(error);
       this.alertsService.add('Could not create meeting', JSON.stringify(error, null, 2));

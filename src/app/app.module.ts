@@ -18,6 +18,8 @@ import { OAuthSettings } from '../oauth';
 import { CalendarComponent } from './calendar/calendar.component';
 import { MeetingComponent } from './meeting/meeting.component';
 
+const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,8 +37,28 @@ import { MeetingComponent } from './meeting/meeting.component';
     FontAwesomeModule,
     MsalModule.forRoot({
       auth: {
-        clientId: OAuthSettings.appId
+        clientId: OAuthSettings.appId,
+        authority: OAuthSettings.authority,
+        redirectUri: OAuthSettings.redirectUri
+      },
+      cache: {
+        cacheLocation: 'localStorage',
+        storeAuthStateInCookie: isIE, // Set to true for Internet Explorer 11
       }
+    },
+    {
+      popUp: !isIE,
+      consentScopes: [
+        'user.read',
+        'calendars.read',
+        'openid',
+        'profile',
+      ],
+      unprotectedResources: [],
+      protectedResourceMap: [
+        ['https://graph.microsoft.com/v1.0/me', ['user.read', 'calendars.read', 'onlinemeetings.readwrite']]
+      ],
+      extraQueryParameters: {}
     })
   ],
   // </imports>
