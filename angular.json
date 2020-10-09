@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "graph-tutorial": {
+    "msteams-demo-app": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/graph-tutorial",
+            "outputPath": "dist/msteams-demo-app",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -62,18 +62,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "graph-tutorial:build"
+            "browserTarget": "msteams-demo-app:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "graph-tutorial:build:production"
+              "browserTarget": "msteams-demo-app:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "graph-tutorial:build"
+            "browserTarget": "msteams-demo-app:build"
           }
         },
         "test": {
@@ -110,18 +110,18 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "graph-tutorial:serve"
+            "devServerTarget": "msteams-demo-app:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "graph-tutorial:serve:production"
+              "devServerTarget": "msteams-demo-app:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "graph-tutorial",
+  "defaultProject": "msteams-demo-app",
   "cli": {
     "analytics": "ef631b48-fc34-445a-98fd-94d45043d10b"
   }

@@ -1,5 +1,5 @@
 {
-  "name": "graph-tutorial",
+  "name": "msteams-demo-app",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
